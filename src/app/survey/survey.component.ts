@@ -3,7 +3,7 @@ import { AnswersPostObject } from './../requestObjects/AnswersPostObject';
 import { Answer } from './../entities/Answer';
 import { Survey } from './../entities/Survey';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HostService } from '../services/host.service';
 
 @Component({
@@ -17,9 +17,9 @@ export class SurveyComponent implements OnInit {
   survey: Survey;
   answers: Answer[];
   answersPost: AnswersPostObject;
-  test: number;
+  test: number[];
 
-  constructor(private route: ActivatedRoute, private service: HostService) { }
+  constructor(private route: ActivatedRoute, private service: HostService, private router: Router) { }
 
   ngOnInit(): void {
     this.hostId = this.route.snapshot.params['id'];
@@ -29,7 +29,7 @@ export class SurveyComponent implements OnInit {
   loadSurvey() {
     this.service.getResult(this.hostId)
       .subscribe(data => {
-        console.log(data)
+        console.log(data);
         this.survey = data;
         this.initAnswers();
       }, error => console.log(error));
@@ -40,7 +40,7 @@ export class SurveyComponent implements OnInit {
     this.postAnswer();
   }
 
-  prepareData(){
+  prepareData() {
 
     this.answersPost = new AnswersPostObject();
     this.answersPost.surveyId = this.survey.id;
@@ -49,6 +49,14 @@ export class SurveyComponent implements OnInit {
       postAnswer.id = answer.id;
       postAnswer.questionId = answer.question.id;
       postAnswer.value = answer.value;
+      if (answer.values != null) {
+        postAnswer.values = new Array();
+        for (var i = 0; i < answer.values.length; i++) {
+          if(answer.values[i] == 1){
+            postAnswer.values.push(i);
+          }
+        }
+      }
       this.answersPost.answers.push(postAnswer);
     });
 
@@ -69,10 +77,14 @@ export class SurveyComponent implements OnInit {
     })*/
   }
 
+  goToSuccess() {
+    this.router.navigate(['/login']);
+  }
+
   postAnswer() {
     this.service.postAnswer(this.answersPost)
       .subscribe(data => {
-        console.log(data)
+        this.goToSuccess();
       }, error => console.log(error));
   }
 
@@ -82,19 +94,25 @@ export class SurveyComponent implements OnInit {
       section.questions.forEach(question => {
         var answer = new Answer()
         answer.question = question;
+        answer.value = 1;
+        if (question.type == 4) {
+          answer.values = new Array(question.choices.length);
+        }
         answer.survey = this.survey;
         question.answer = answer;
         this.answers.push(question.answer);
       })
     });
-    this.printAnswers();
   }
 
-  printAnswers() {
+  /*printAnswers() {
     console.log("Empty");
     this.answers.forEach(answer => {
       console.log(answer.question.text + " " + answer.value)
     });
+  }*/
+
+  printAnswersValues() {
   }
 
 }

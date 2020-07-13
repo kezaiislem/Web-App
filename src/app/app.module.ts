@@ -31,6 +31,10 @@ import { FormsModule } from '@angular/forms';
       {
         path: 'survey/:id',
         component: SurveyComponent
+      },
+      {
+        path: 'submitted',
+        component: SurveyComponent
       }
     ]),
     BrowserAnimationsModule

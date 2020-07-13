@@ -23,7 +23,7 @@
 
 <body class="d-flex justify-content-center">
     <div class="container m-5">
-        <form (ngSubmit)="onSubmit()">
+        <form (ngSubmit)="onSubmit()" ngNativeValidate action="post">
             <div class="card mb-4 " *ngFor="let section of survey?.sections">
                 <div class="card-body">
                     <ol class="breadcrumb p-0 white font-weight-bold ml-2">
@@ -33,68 +33,130 @@
                     </ol>
                     <hr>
                     <span class="font-weight-normal ml-2"> {{section.description}} </span>
-                    <div *ngFor="let question of section?.questions">
+                    <div *ngFor="let question of section?.questions; let i = index">
                         <hr>
                         <span class="font-weight-normal ml-2"> {{question.text}} ?</span>
                         <div [ngSwitch]="question.type" class="mt-3 ml-4">
-                            <!--<div *ngSwitchCase=0>-->
+                            <div *ngSwitchCase=0>
                                 <div class="custom-control custom-radio mt-1">
-                                    <input type="radio" required [(ngModel)]="question.answer.value" value="1"
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="1"
                                         class="custom-control-input" id="likert-{{question.id}}-1"
                                         name="{{question.id}}" mdbInput>
                                     <label class="custom-control-label" for="likert-{{question.id}}-1">Strongly Disagree</label>
                                 </div>
                                 <div class="custom-control custom-radio mt-1">
-                                    <input type="radio" required [(ngModel)]="question.answer.value" value="2"
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="2"
                                         class="custom-control-input" id="likert-{{question.id}}-2"
                                         name="{{question.id}}" mdbInput>
                                     <label class="custom-control-label" for="likert-{{question.id}}-2">Disagree</label>
                                 </div>
                                 <div class="custom-control custom-radio mt-1">
-                                    <input type="radio" required [(ngModel)]="question.answer.value" value="3"
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="3"
                                         class="custom-control-input" id="likert-{{question.id}}-3"
                                         name="{{question.id}}" mdbInput>
                                     <label class="custom-control-label" for="likert-{{question.id}}-3">Undecided</label>
                                 </div>
                                 <div class="custom-control custom-radio mt-1">
-                                    <input type="radio" required [(ngModel)]="question.answer.value" value="4"
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="4"
                                         class="custom-control-input" id="likert-{{question.id}}-4"
                                         name="{{question.id}}" mdbInput>
                                     <label class="custom-control-label" for="likert-{{question.id}}-4">Agree</label>
                                 </div>
                                 <div class="custom-control custom-radio mt-1">
-                                    <input type="radio" required [(ngModel)]="question.answer.value" value="5"
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="5"
                                         class="custom-control-input" id="likert-{{question.id}}-5"
                                         name="{{question.id}}" mdbInput>
                                     <label class="custom-control-label" for="likert-{{question.id}}-5">Strongly Agree</label>
                                 </div>
-                            <!--</div>
+                            </div>
                             <div *ngSwitchCase=1>
-                                <mat-radio-group>
-                                    <mat-radio-button value=1>Option1</mat-radio-button>
-                                    <mat-radio-button value=2>Option2</mat-radio-button>
-                                    <mat-radio-button value=3>Option3</mat-radio-button>
-                                    <mat-radio-button value=4>Option4</mat-radio-button>
-                                    <mat-radio-button value=5>Option5</mat-radio-button>
-                                </mat-radio-group>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="1"
+                                        class="custom-control-input" id="likert-{{question.id}}-1"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-1">Strongly Disagree</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="2"
+                                        class="custom-control-input" id="likert-{{question.id}}-2"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-2">Disagree</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="3"
+                                        class="custom-control-input" id="likert-{{question.id}}-3"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-3">Undecided</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="4"
+                                        class="custom-control-input" id="likert-{{question.id}}-4"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-4">Agree</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="5"
+                                        class="custom-control-input" id="likert-{{question.id}}-5"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-5">Strongly Agree</label>
+                                </div>
                             </div>
                             <div *ngSwitchCase=2>
-                                <mat-radio-group>
-                                    <mat-radio-button value=1>Option1</mat-radio-button>
-                                    <mat-radio-button value=2>Option2</mat-radio-button>
-                                    <mat-radio-button value=3>Option3</mat-radio-button>
-                                    <mat-radio-button value=4>Option4</mat-radio-button>
-                                    <mat-radio-button value=5>Option5</mat-radio-button>
-                                    <mat-radio-button value=6>Option6</mat-radio-button>
-                                    <mat-radio-button value=7>Option7</mat-radio-button>
-                                </mat-radio-group>>
-                            </div>-->
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="1"
+                                        class="custom-control-input" id="likert-{{question.id}}-1"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-1">Strongly Disagree</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="2"
+                                        class="custom-control-input" id="likert-{{question.id}}-2"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-2">Disagree</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="3"
+                                        class="custom-control-input" id="likert-{{question.id}}-3"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-3">Undecided</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="4"
+                                        class="custom-control-input" id="likert-{{question.id}}-4"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-4">Agree</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="5"
+                                        class="custom-control-input" id="likert-{{question.id}}-5"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-5">Strongly Agree</label>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase=3>
+                                <div *ngFor="let choice of question?.choices; let j = index">
+                                    <div class="custom-control custom-radio mt-1">
+                                        <input type="radio" required [(ngModel)]="question.answer.value" [value]="j+1"
+                                            class="custom-control-input" id="likert-{{i}}-{{j}}"
+                                            name="{{question.id}}" mdbInput>
+                                        <label class="custom-control-label" for="likert-{{i}}-{{j}}">{{choice}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase=4>
+                                <div *ngFor="let choice of question?.choices; let j = index">
+                                    <div class="custom-control custom-checkbox mt-1">
+                                        <input name="{{question.id}}" type="checkbox" class="custom-control-input" id="checkBox-{{i}}-{{j}}" [value]="j+1" [(ngModel)]="question.answer.values[j]">
+                                        <label class="custom-control-label" for="checkBox-{{i}}-{{j}}">{{choice}}</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="m-4 d-flex justify-content-end">
-                <button type="button" (click)="onSubmit()" mdbBtn color="light-blue" mdbWavesEffect>Sumbit</button>
+                <button type="submit" mdbBtn color="light-blue" mdbWavesEffect>Sumbit</button>
             </div>
         </form>
     </div>

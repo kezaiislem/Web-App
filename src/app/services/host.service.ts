@@ -15,7 +15,8 @@ export class HostService {
   httpOtions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token'
+      'Authorization': 'my-auth-token',
+      'responseType': 'json'
     })
   }
 
@@ -23,8 +24,8 @@ export class HostService {
     return this.http.get<Survey>("http://localhost:8080/survey/" + id);
   }
 
-  postAnswer(answers: AnswersPostObject): Observable<string> {
-    return this.http.post<string>("http://localhost:8080/postAnswer", answers, this.httpOtions);
+  postAnswer(answers: AnswersPostObject): Observable<String> {
+    return this.http.post<String>("http://localhost:8080/postAnswer", answers, this.httpOtions);
   }
 
 }
