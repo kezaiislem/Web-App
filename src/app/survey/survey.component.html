@@ -42,31 +42,19 @@
                                     <input type="radio" required [(ngModel)]="question.answer.value" [value]="1"
                                         class="custom-control-input" id="likert-{{question.id}}-1"
                                         name="{{question.id}}" mdbInput>
-                                    <label class="custom-control-label" for="likert-{{question.id}}-1">Strongly Disagree</label>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-1">Disagree</label>
                                 </div>
                                 <div class="custom-control custom-radio mt-1">
                                     <input type="radio" required [(ngModel)]="question.answer.value" [value]="2"
                                         class="custom-control-input" id="likert-{{question.id}}-2"
                                         name="{{question.id}}" mdbInput>
-                                    <label class="custom-control-label" for="likert-{{question.id}}-2">Disagree</label>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-2">Undecided</label>
                                 </div>
                                 <div class="custom-control custom-radio mt-1">
                                     <input type="radio" required [(ngModel)]="question.answer.value" [value]="3"
                                         class="custom-control-input" id="likert-{{question.id}}-3"
                                         name="{{question.id}}" mdbInput>
-                                    <label class="custom-control-label" for="likert-{{question.id}}-3">Undecided</label>
-                                </div>
-                                <div class="custom-control custom-radio mt-1">
-                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="4"
-                                        class="custom-control-input" id="likert-{{question.id}}-4"
-                                        name="{{question.id}}" mdbInput>
-                                    <label class="custom-control-label" for="likert-{{question.id}}-4">Agree</label>
-                                </div>
-                                <div class="custom-control custom-radio mt-1">
-                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="5"
-                                        class="custom-control-input" id="likert-{{question.id}}-5"
-                                        name="{{question.id}}" mdbInput>
-                                    <label class="custom-control-label" for="likert-{{question.id}}-5">Strongly Agree</label>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-3">Agree</label>
                                 </div>
                             </div>
                             <div *ngSwitchCase=1>
@@ -118,19 +106,31 @@
                                     <input type="radio" required [(ngModel)]="question.answer.value" [value]="3"
                                         class="custom-control-input" id="likert-{{question.id}}-3"
                                         name="{{question.id}}" mdbInput>
-                                    <label class="custom-control-label" for="likert-{{question.id}}-3">Undecided</label>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-3">More or less Disagree</label>
                                 </div>
                                 <div class="custom-control custom-radio mt-1">
                                     <input type="radio" required [(ngModel)]="question.answer.value" [value]="4"
                                         class="custom-control-input" id="likert-{{question.id}}-4"
                                         name="{{question.id}}" mdbInput>
-                                    <label class="custom-control-label" for="likert-{{question.id}}-4">Agree</label>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-4">Undecided</label>
                                 </div>
                                 <div class="custom-control custom-radio mt-1">
                                     <input type="radio" required [(ngModel)]="question.answer.value" [value]="5"
                                         class="custom-control-input" id="likert-{{question.id}}-5"
                                         name="{{question.id}}" mdbInput>
-                                    <label class="custom-control-label" for="likert-{{question.id}}-5">Strongly Agree</label>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-5">More or less Agree</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="6"
+                                        class="custom-control-input" id="likert-{{question.id}}-6"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-6">Agree</label>
+                                </div>
+                                <div class="custom-control custom-radio mt-1">
+                                    <input type="radio" required [(ngModel)]="question.answer.value" [value]="7"
+                                        class="custom-control-input" id="likert-{{question.id}}-7"
+                                        name="{{question.id}}" mdbInput>
+                                    <label class="custom-control-label" for="likert-{{question.id}}-7">Strongly Agree</label>
                                 </div>
                             </div>
                             <div *ngSwitchCase=3>
