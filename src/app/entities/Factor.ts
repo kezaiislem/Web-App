@@ -1,6 +1,6 @@
 import { Question } from "./Question";
 
-export class Section {
+export class Factor {
     id: number;
     title: string;
     description: string;

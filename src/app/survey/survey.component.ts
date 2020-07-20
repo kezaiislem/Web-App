@@ -1,3 +1,4 @@
+import { Factor } from './../entities/Factor';
 import { AnswerPostObject } from './../requestObjects/AnswerPostObject';
 import { AnswersPostObject } from './../requestObjects/AnswersPostObject';
 import { Answer } from './../entities/Answer';
@@ -90,8 +91,8 @@ export class SurveyComponent implements OnInit {
 
   initAnswers() {
     this.answers = [];
-    this.survey.sections.forEach(section => {
-      section.questions.forEach(question => {
+    this.survey.factors.forEach(factor => {
+      factor.questions.forEach(question => {
         var answer = new Answer()
         answer.question = question;
         answer.value = 1;

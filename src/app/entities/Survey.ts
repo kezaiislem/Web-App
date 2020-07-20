@@ -1,7 +1,7 @@
-import { Section } from "./Section";
+import { Factor } from "./Factor";
 
 export class Survey {
     id: number;
     phaseNumber: number;
-    sections: Section[];
+    factors: Factor[];
 }

@@ -24,16 +24,16 @@
 <body class="d-flex justify-content-center">
     <div class="container m-5">
         <form (ngSubmit)="onSubmit()" ngNativeValidate action="post">
-            <div class="card mb-4 " *ngFor="let section of survey?.sections">
+            <div class="card mb-4 " *ngFor="let factor of survey?.factors">
                 <div class="card-body">
                     <ol class="breadcrumb p-0 white font-weight-bold ml-2">
                         <li class="breadcrumb-item">
-                            <span>{{section.title}}</span>
+                            <span>{{factor.title}}</span>
                         </li>
                     </ol>
                     <hr>
-                    <span class="font-weight-normal ml-2"> {{section.description}} </span>
-                    <div *ngFor="let question of section?.questions; let i = index">
+                    <span class="font-weight-normal ml-2"> {{factor.description}} </span>
+                    <div *ngFor="let question of factor?.questions; let i = index">
                         <hr>
                         <span class="font-weight-normal ml-2"> {{question.text}} ?</span>
                         <div [ngSwitch]="question.type" class="mt-3 ml-4">
