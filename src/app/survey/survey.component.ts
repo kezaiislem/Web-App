@@ -32,6 +32,9 @@ export class SurveyComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.survey = data;
+        if(this.survey == null){
+          this.goToNotFound();
+        }
         this.initAnswers();
       }, error => console.log(error));
   }
@@ -42,7 +45,6 @@ export class SurveyComponent implements OnInit {
   }
 
   prepareData() {
-
     this.answersPost = new AnswersPostObject();
     this.answersPost.surveyId = this.survey.id;
     this.answers.forEach(answer => {
@@ -60,25 +62,13 @@ export class SurveyComponent implements OnInit {
       }
       this.answersPost.answers.push(postAnswer);
     });
-
-
-    /*this.answers.forEach(answer => {
-      answer.question.answer = null;
-      answer.survey.sections = null;
-    })*/
-
-
-    /*this.answersPost = [];
-    this.answers.forEach(answer => {
-      var element = new AnswersPostObject();
-      element.value = answer.value;
-      element.questionId = answer.question.id;
-      element.surveyId = answer.survey.id;
-      this.answersPost.push(element);
-    })*/
   }
 
   goToSuccess() {
+    this.router.navigate(['/login']);
+  }
+
+  goToNotFound() {
     this.router.navigate(['/login']);
   }
 
@@ -105,15 +95,4 @@ export class SurveyComponent implements OnInit {
       })
     });
   }
-
-  /*printAnswers() {
-    console.log("Empty");
-    this.answers.forEach(answer => {
-      console.log(answer.question.text + " " + answer.value)
-    });
-  }*/
-
-  printAnswersValues() {
-  }
-
 }

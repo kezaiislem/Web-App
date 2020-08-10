@@ -2,7 +2,7 @@
 <mdb-navbar SideClass=" navbar navbar-expand-lg navbar-dark light-blue" [containerInside]="false">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><span class="align-middle navbar-brand">Survey</span></mdb-navbar-brand>
+    <mdb-navbar-brand><span class="align-middle navbar-brand">{{survey.title}}</span></mdb-navbar-brand>
 
     <!-- Collapsible content -->
     <links>
@@ -31,11 +31,9 @@
                             <span>{{factor.title}}</span>
                         </li>
                     </ol>
-                    <hr>
-                    <span class="font-weight-normal ml-2"> {{factor.description}} </span>
                     <div *ngFor="let question of factor?.questions; let i = index">
                         <hr>
-                        <span class="font-weight-normal ml-2"> {{question.text}} ?</span>
+                        <span class="font-weight-normal ml-2"> {{i+1}} - {{question.text}} ?</span>
                         <div [ngSwitch]="question.type" class="mt-3 ml-4">
                             <div *ngSwitchCase=0>
                                 <div class="custom-control custom-radio mt-1">
