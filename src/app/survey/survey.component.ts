@@ -6,6 +6,7 @@ import { Survey } from './../entities/Survey';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HostService } from '../services/host.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-survey',
@@ -20,9 +21,10 @@ export class SurveyComponent implements OnInit {
   answersPost: AnswersPostObject;
   test: number[];
 
-  constructor(private route: ActivatedRoute, private service: HostService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private service: HostService, private router: Router, private titleService: Title) { }
 
   ngOnInit(): void {
+    this.setTitle("Survey")
     this.hostId = this.route.snapshot.params['id'];
     this.loadSurvey();
   }
@@ -32,11 +34,12 @@ export class SurveyComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.survey = data;
+        this.setTitle(this.survey.title)
         if(this.survey == null){
           this.goToNotFound();
         }
         this.initAnswers();
-      }, error => console.log(error));
+      }, error => this.goToNotFound());
   }
 
   onSubmit() {
@@ -65,11 +68,11 @@ export class SurveyComponent implements OnInit {
   }
 
   goToSuccess() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/submitted']);
   }
 
   goToNotFound() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/error']);
   }
 
   postAnswer() {
@@ -94,5 +97,9 @@ export class SurveyComponent implements OnInit {
         this.answers.push(question.answer);
       })
     });
+  }
+
+  private setTitle(title : string){
+    this.titleService.setTitle(title);
   }
 }
