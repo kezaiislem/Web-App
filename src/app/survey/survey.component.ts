@@ -34,10 +34,10 @@ export class SurveyComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.survey = data;
-        this.setTitle(this.survey.title)
         if(this.survey == null){
           this.goToNotFound();
         }
+        this.setTitle(this.survey.title);
         this.initAnswers();
       }, error => this.goToNotFound());
   }
